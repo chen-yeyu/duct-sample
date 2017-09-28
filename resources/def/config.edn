@@ -1,0 +1,51 @@
+{:duct.core/project-ns  def
+ :duct.core/environment :development
+
+
+ :duct.module/logging {}
+ :duct.module.web/site {}
+
+ :duct.database/sql
+ {
+   :auto-commit        true
+   :read-only          false
+   :connection-timeout 30000
+   :validation-timeout 5000
+   :idle-timeout       600000
+   :max-lifetime       1800000
+   :minimum-idle       10
+   :maximum-pool-size  10
+   :pool-name          "db-pool"
+   :adapter            "postgresql"
+   :username           "chenyeyu"
+   :password           "A123"
+   :database-name      "test"
+   :server-name         "127.0.0.1"
+   :port-number        5432
+   :register-mbeans    false
+   :connection-uri     "jdbc:postgresql://127.0.0.1:5432/test"}
+
+ :duct.server.http/jetty
+ {:port    5001}
+
+ :duct.middleware.web/defaults
+ {
+  :security false
+  :anti-forgery false
+  :responses {:not-modified-responses true
+              :absolute-redirects     true
+              :content-types          true
+              :default-charset        "utf-8"}}
+
+
+ :duct.router/cascading
+ [#ig/ref :def.handler/mypage
+  #ig/ref :def.handler/example
+  #ig/ref :def.handler/login]
+
+ :def.handler/login
+ {}
+ :def.handler/example
+ {}
+ :def.handler/mypage
+ {:db #ig/ref :duct.database/sql}}
