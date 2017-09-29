@@ -26,7 +26,12 @@
    :connection-uri     "jdbc:postgresql://127.0.0.1:5432/test"}
 
  :duct.server.http/jetty
- {:port    5001}
+ {:port    5001
+  :handler #ig/ref :duct.core/handler}
+
+ :duct.core/handler
+ {:router      #ig/ref :duct/router
+  :middleware [#ig/ref :duct.middleware.web/defaults]}
 
  :duct.middleware.web/defaults
  {
