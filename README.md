@@ -1,4 +1,4 @@
-# def
+# duct sample(sql)
 
 FIXME: description
 
